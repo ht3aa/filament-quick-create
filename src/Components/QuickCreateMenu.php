@@ -91,7 +91,7 @@ class QuickCreateMenu extends Component implements HasActions, HasForms
 
                         if ($page) {
                             $reflectionMethod = new \ReflectionMethod($page, 'getHeaderActions');
-                            $actions = $reflectionMethod->invoke(new $page());
+                            $actions = $reflectionMethod->invoke(new $page);
                             $createAction = collect($actions)->filter(function ($action) {
                                 return $action instanceof CreateAction;
                             })->first();
@@ -118,7 +118,7 @@ class QuickCreateMenu extends Component implements HasActions, HasForms
                             if ($translatableContentDriver = $livewire->makeFilamentTranslatableContentDriver()) {
                                 $record = $translatableContentDriver->makeRecord($model, $data);
                             } else {
-                                $record = new $model();
+                                $record = new $model;
                                 $record->fill($data);
                             }
 
